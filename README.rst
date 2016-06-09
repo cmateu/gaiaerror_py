@@ -27,7 +27,7 @@ The numpy and scipy libraries are required
 
 **QUICK GUIDE**
 
-The codes take input files (ascii) containing  X Y Z VX VY VZ Mv V-I, spatial coordinates must be in kpc and velocities in km/s. Mv and V-I are the absolute magnitude and V-I intrinsic colour.
+The codes take input files (ascii) containing *galactocentric* X Y Z VX VY VZ Mv V-I, spatial coordinates must be in kpc and velocities in km/s. Mv and V-I are the absolute magnitude and V-I intrinsic colour.
 
 You can use the example input file provided to run the Gaia error simulation as::
 
@@ -35,7 +35,7 @@ You can use the example input file provided to run the Gaia error simulation as:
 
 The output file will be myfile.ge.dat.
 
-To simulate 25% distance errors plus Gaia errors for the remaining quantities, run the gaiaerr_photerr.py code as::
+To simulate 25% distance errors (as for photometric parallaxes) plus Gaia errors for the remaining quantities, run the gaiaerr_photerr.py code as::
 
 	gaiaerr_photerr.py myfile.ne.dat 0.25
 
@@ -51,7 +51,7 @@ You can also simulate errors for extended mission lifetimes, e.g. if the Gaia mi
 
 	gaiaerr.py myfile.ne.dat -tm 7.
 
-It is assumed the errors scale as t\*\*3/2 for up to 10 years of operation. For larger times a t\*\*1/2 scaling factor is assumed (A.G.A. Brown, private communication) 
+Note that no error scaling is simulated for the radial velocity, for this the errors are always simulated as end-of-mission errors.
 
 **OUTPUT**
 
