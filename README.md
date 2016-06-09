@@ -49,6 +49,11 @@ You can also simulate errors for extended mission lifetimes, e.g. if the Gaia mi
 
 It is assumed the errors scale as t\*\*3/2 for up to 10 years of operation. For larger times a t\*\*1/2 scaling factor is assumed (A.G.A. Brown, private communication) 
 
+**AUTHORS**
+
+The GaiaError fortran library has been developed by Merce Romero-Gomez (University of Barcelona, UB) and is maintained at https://github.com/mromerog/Gaia-errors.
+The python wrapped has been developed by Cecilia Mateu (CIDA).
+
 
 
 
