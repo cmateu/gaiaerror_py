@@ -8,11 +8,11 @@ This is a simple Python wrapper for Merce Romero-Gomez's `Gaia-Error code <https
 This version of Merce Romero-Gomez's code includes the evaluation of the Drimmel extinction map.
 
 
-Codes and files provided:
+Codes and files provided
 
-* gaiaerr.py: Simulates Gaia errors 
-* gaiaerr_photerr.py: Simulates Gaia errors for all quantities except distance. For the distance, (gaussian) errors are simulated with a fixed relative error. 
-* example_data/myfile.ne.dat: Example input file
+- gaiaerr.py: Simulates Gaia errors 
+- gaiaerr_photerr.py: Simulates Gaia errors for all quantities except distance. For the distance, (gaussian) errors are simulated with a fixed relative error. 
+- example_data/myfile.ne.dat: Example input file
 
 
 **INSTALL**
