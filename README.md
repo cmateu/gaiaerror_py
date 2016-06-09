@@ -1,6 +1,7 @@
-# gaiaerror_py
+Gaia Error Py-Wrapper
+======
 
-This is a simple Python wrapper for Merce Romero-Gomez's Gaia error code.
+This is a simple Python wrapper for Merce Romero-Gomez's `Gaia-Error code <https://github.com/mromerog/Gaia-errors>`__.
 
 **DESCRIPTION**
 
