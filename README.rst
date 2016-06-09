@@ -32,11 +32,13 @@ You can use the example input file provided to run the Gaia error simulation as:
 
 	gaiaerr.py myfile.ne.dat
 
-The output file will be myfile.pe.dat.
+The output file will be myfile.ge.dat.
 
 To simulate 25% distance errors plus Gaia errors for the remaining quantities, run the gaiaerr_photerr.py code as::
 
 	gaiaerr_photerr.py myfile.ne.dat 0.25
+
+The output file will be myfile.pe.dat.
 
 By default both codes simulate nominal end-of-mission Gaia errors, i.e. the errors expected at the end of the nominal mission lifetime of 5 yr. To simulate errors at a different mission time, use the -tm option followed by the desired mission time in years.
 
@@ -49,6 +51,24 @@ You can also simulate errors for extended mission lifetimes, e.g. if the Gaia mi
 	gaiaerr.py myfile.ne.dat -tm 7.
 
 It is assumed the errors scale as t\*\*3/2 for up to 10 years of operation. For larger times a t\*\*1/2 scaling factor is assumed (A.G.A. Brown, private communication) 
+
+**OUTPUT**
+
+For both codes the output file names are the same as the input files with the **.ge.dat** extension for  **gaiaerr.py** and **.pe.dat** for  **gaiaerr_photerr.py**.
+
+Both codes produce output files with the following structure:
+
+- Av, V, Gmag, Grvs : V-band extinction, V-band, G and Grvs apparent magnitudes
+- xX,xY,xZ,xVX,xVY,xVZ : error-free cartesian galactocentric coordinates (kpc) and velocities (km/s)
+- xl_deg,xb_deg,xRhel_kpc,xmulcosb_masyr,xmub_masyr,xvrad : error-free observables (l,b, heliocentric distance in kpc, proper motions in mas/yr, radial velocities in km/s)
+- gX,gY,gZ,gVX,gVY,gVZ : error-convolved cartesian galactocentric coordinates and velocities.
+- gl_deg,gb_deg,gRhel_kpc,gmulcosb_masyr,gmub_masyr,xvrad : error-convolved observables
+- relerr_D: relative error in distance
+- sig_mub: mean error in proper motion (gaussian standard deviation)
+- sig_vrad: mean error in radial velocity (gaussian standard deviation)
+- VI: observed V-I colour
+- relerr_mub: relative error in proper motion
+- relerr_vrad: relative error in radial velocity
 
 **AUTHORS**
 
