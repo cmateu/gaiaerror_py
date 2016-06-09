@@ -1,0 +1,27 @@
+      subroutine Gal_to_UVW(X,Y,Z,VX,VY,VZ,U,V,W)
+C -------------------------------------------------------------------
+C CHANGES FROM (VX,VY,VZ) CARTESIAN GALACTOCENTRIC VELOCITY VECTOR TO
+C (U,V,W) VELOCITY VECTOR WITH U POINTING TOWARDS TO GC, V TOWARDS
+C GALACTIC ROTATION AND W PERPENDICULAR TO THE GALACTIC PLANE
+C WE NEED (X,Y,Z) TO COMPUTE THE POSITION ANGLE THETA.
+c
+C--------------------------------------------------------------------
+      IMPLICIT REAL*8(A-H,O-Z)
+
+      PI=4.D0*DATAN(1.D0)
+
+C POSITION ANGLE
+      THETA=DATAN2(X,Y)
+C ROTATION OF VX,VY OF ANGLE 270-THETA COUNTERCLOCKWISE
+      ANGLE=3.D0*PI/2.D0-THETA
+      CALL rot_antihorari(angle,VX,VY,VX2,VY2)
+C SUBSTRACT THE DIFFERENTIAL ROTATION OF THE STAR
+      R=DSQRT(X*X+Y*Y)
+      CALL dV2(R,Z,W)
+      U=VX2
+      V=VY2!-W*R sense rotacio diferencial
+      W=VZ
+      RETURN
+      END
+
+

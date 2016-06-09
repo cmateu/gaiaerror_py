@@ -1,0 +1,8 @@
+rm -f *.o
+gfortran -O -c Avrou.f
+gfortran -O -c Gal_to_UVW.f
+gfortran -O -c coordrou.f
+gfortran -O -c gaussdev.f
+gfortran -O -c irGaia-errorsNov2014.f
+gfortran -O -c Gaia-errorsOct2015.f
+gfortran -O compute_err_color.f Gaia-errorsOct2015.f coordrou.f gaussdev.f Gal_to_UVW.f Avrou.f -o compute_err_color_gaia_tmission

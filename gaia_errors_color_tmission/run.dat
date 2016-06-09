@@ -1,0 +1,5 @@
+Drimmel extinction law, input itype=2 (equatorial cood) and
+c afact='y', using scaling factors
+         itype=3
+         afact='y'
+         call  DrimmelAv(dist,gl/deg,gb/deg,itype,afact,Av,ifg,ifac)
