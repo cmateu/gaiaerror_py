@@ -14,7 +14,7 @@ Codes and files provided
 - **gaiaerr_photerr.py**: Simulates Gaia errors for all quantities except distance. For the distance, (gaussian) errors are simulated with a fixed relative error. 
 - **example_data/myfile.ne.dat**: Example input file
 
-*RECOMMENDATIONS*: If you already have your own estimate/measurement of the extinction, it is much faster to use Merce's code directly rather than this one, as the evaluation of the extinction map is slightly demanding.
+*RECOMMENDATIONS*: If you already have your own estimate/measurement of the extinction, it is much faster to use `Merce's code <https://github.com/mromerog/Gaia-errors>`__ directly rather than this one, as the evaluation of the extinction map is slightly demanding.
 
 **INSTALL**
 
