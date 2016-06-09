@@ -28,23 +28,23 @@ The numpy and scipy libraries are required
 
 The codes take input files (ascii) containing  X Y Z VX VY VZ Mv V-I, spatial coordinates must be in kpc and velocities in km/s. Mv and V-I are the absolute magnitude and V-I intrinsic colour.
 
-You can use the example input file provided to run the Gaia error simulation as:
+You can use the example input file provided to run the Gaia error simulation as::
 
 	gaiaerr.py myfile.ne.dat
 
 The output file will be myfile.pe.dat.
 
-To simulate 25% distance errors plus Gaia errors for the remaining quantities, run the gaiaerr_photerr.py code as:
+To simulate 25% distance errors plus Gaia errors for the remaining quantities, run the gaiaerr_photerr.py code as::
 
 	gaiaerr_photerr.py myfile.ne.dat 0.25
 
 By default both codes simulate nominal end-of-mission Gaia errors, i.e. the errors expected at the end of the nominal mission lifetime of 5 yr. To simulate errors at a different mission time, use the -tm option followed by the desired mission time in years.
 
-The following example will provide errors simulated for 1.5 yrs of operation:
+The following example will provide errors simulated for 1.5 yrs of operation::
 
 	gaiaerr.py myfile.ne.dat -tm 1.5
 
-You can also simulate errors for extended mission lifetimes, e.g. if the Gaia mission is extended for 2 more years, simulate the errors as:
+You can also simulate errors for extended mission lifetimes, e.g. if the Gaia mission is extended for 2 more years, simulate the errors as::
 
 	gaiaerr.py myfile.ne.dat -tm 7.
 
