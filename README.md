@@ -47,7 +47,7 @@ You can also simulate errors for extended mission lifetimes, e.g. if the Gaia mi
 
 	gaiaerr.py myfile.ne.dat -tm 7.
 
-It is assumed the errors scale as t\**3/2 for up to 10 years of operation. For larger times a t**1/2 scaling factor is assumed (A.G.A. Brown, private communication) 
+It is assumed the errors scale as t\*\*3/2 for up to 10 years of operation. For larger times a t\*\*1/2 scaling factor is assumed (A.G.A. Brown, private communication) 
 
 
 
