@@ -30,7 +30,7 @@ The codes take input files (ascii) containing  X Y Z VX VY VZ Mv V-I, spatial co
 
 You can use the example input file provided to run the Gaia error simulation as::
 
-	gaiaerr.py myfile.ne.dat
+  gaiaerr.py myfile.ne.dat
 
 The output file will be myfile.pe.dat.
 
