@@ -51,7 +51,7 @@ It is assumed the errors scale as t\*\*3/2 for up to 10 years of operation. For 
 
 **AUTHORS**
 
-The GaiaError fortran library has been developed by Merce Romero-Gomez (University of Barcelona, UB) and is maintained at https://github.com/mromerog/Gaia-errors.
+The Gaia-Errors fortran library and package has been developed by Merce Romero-Gomez (University of Barcelona, UB) and is maintained at https://github.com/mromerog/Gaia-errors.
 The python wrapped has been developed by Cecilia Mateu (CIDA).
 
 
