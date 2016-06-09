@@ -6,6 +6,7 @@ This is a simple Python wrapper for Merce Romero-Gomez's Gaia error code.
 
 This version of Merce Romero-Gomez's code includes the evaluation of the Drimmel extinction map.
 
+
 Codes and files provided:
 
 	* gaiaerr.py: Simulates Gaia errors 
@@ -35,6 +36,19 @@ The output file will be myfile.pe.dat.
 To simulate 25% distance errors plus Gaia errors for the remaining quantities, run the gaiaerr_photerr.py code as:
 
 	gaiaerr_photerr.py myfile.ne.dat 0.25
+
+By default both codes simulate nominal end-of-mission Gaia errors, i.e. the errors expected at the end of the nominal mission lifetime of 5 yr. To simulate errors at a different mission time, use the -tm option followed by the desired mission time in years.
+
+The following example will provide errors simulated for 1.5 yrs of operation:
+
+	gaiaerr.py myfile.ne.dat -tm 1.5
+
+You can also simulate errors for extended mission lifetimes, e.g. if the Gaia mission is extended for 2 more years, simulate the errors as:
+
+	gaiaerr.py myfile.ne.dat -tm 7.
+
+It is assumed the errors scale as t\**3/2 for up to 10 years of operation. For larger times a t**1/2 scaling factor is assumed (A.G.A. Brown, private communication) 
+
 
 
 
