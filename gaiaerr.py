@@ -7,9 +7,12 @@ import os.path
 import argparse
 import myutils
 
+#--------Version History----------------------------------------------------------------------------
+# 11/oct/2016: VX,VY,VZ unit error fixed (inputs must be passes in mas/yr always, not muas/yr)
+
 #Gaia error code path
 #gerr_path='/workd/cmateu/gaia_errors_color_tmission'
-gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/gaiaerror_py/'+'gaia_errors_color_tmission'
+gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/my_gaiaerr_wrapper'
 
 parser = argparse.ArgumentParser(description='Simulate Gaia errors + constant relative error in distance')
 parser.add_argument('infile',metavar='infile(.ne.dat)',help='Input File (x y z vx vy vz Mv VI)',nargs=1,action='store')
@@ -33,7 +36,7 @@ else:
  factor=(5./mission_t)**1.    #If new Gaia is launched, scaling can be conservatively assumed to go as t
 #Extra labels
 if mission_t==5: tlabel=''
-else: tlabel='%.0f' % (mission_t)
+else: tlabel='%.1f' % (mission_t)
 
 #Print auxiliary input file for gaerr code.Aux files have to be unique so multiple threads can be run simultaneuosly
 auxinf=infilen+tlabel+'.aux.in'
@@ -73,9 +76,9 @@ sigma_mub_new=(gmub-xmub)*factor
 gmulstar=xmulstar+sigma_mulstar_new
 gmub=xmub+sigma_mub_new
 
-fp,fm=1000.,1000.
-#Inputs for my function must be in muas
-mydat=myutils.helio_obj(gl,gb,fp*gpar,fm*gmulstar,fm*gmub,gvrad,degree=True,flag_mulstar=True)
+fp=1000.
+#Parallax for my function must be in muas. Proper motions must be in mas/yr (as needed by bovy library)
+mydat=myutils.helio_obj(gl,gb,fp*gpar,gmulstar,gmub,gvrad,degree=True,flag_mulstar=True)
 
 #Replace cols appropiately in full matrix
 dat[:,25-1]=gpar
@@ -90,7 +93,7 @@ dat[:,33-1]=dat[:,33-1]*factor  #sigma_mub
 dat[:,36-1]=dat[:,36-1]*factor  #relerr_mub
 #---Cartesian coords
 #recompute only velocities, parallax errors are not changed
-dat[:,22-1]=mydat.vx
+dat[:,22-1]=-mydat.vx
 dat[:,23-1]=mydat.vy
 dat[:,24-1]=mydat.vz
 

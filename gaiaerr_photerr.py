@@ -6,8 +6,10 @@ import os
 import argparse
 import myutils
 
-#Gaia error code path
-gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/gaiaerror_py/'+'gaia_errors_color_tmission'
+#--------Version History----------------------------------------------------------------------------
+# 11/oct/2016: VX,VY,VZ unit error fixed (inputs must be passes in mas/yr always, not muas/yr)
+
+gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/my_gaiaerr_wrapper/'+'gaia_errors_color_tmission'
 
 
 parser = argparse.ArgumentParser(description='Simulate Gaia errors + constant relative error in distance')
@@ -82,9 +84,9 @@ gmub=xmub+sigma_mub_new
 gl=xl+(gl-xl)*factor
 gb=xb+(gb-xb)*factor
 
-fp,fm=1000.,1000.
+fp=1000.
 #Inputs for my function must be in muas
-mydat=myutils.helio_obj(gl,gb,fp*gpar,fm*gmulstar,fm*gmub,gvrad,degree=True,flag_mulstar=True)
+mydat=myutils.helio_obj(gl,gb,fp*gpar,gmulstar,gmub,gvrad,degree=True,flag_mulstar=True)
 
 #Replace cols appropiately in full matrix
 dat[:,25-1]=gpar
@@ -103,7 +105,7 @@ dat[:,36-1]=dat[:,36-1]*factor  #relerr_mub
 dat[:,19-1]=-mydat.x  #- so it matches the transformation used in Merce's code
 dat[:,20-1]=mydat.y
 dat[:,21-1]=mydat.z
-dat[:,22-1]=mydat.vx
+dat[:,22-1]=-mydat.vx
 dat[:,23-1]=mydat.vy
 dat[:,24-1]=mydat.vz
 
