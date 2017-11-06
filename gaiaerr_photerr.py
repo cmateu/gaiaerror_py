@@ -9,7 +9,7 @@ import myutils
 #--------Version History----------------------------------------------------------------------------
 # 11/oct/2016: VX,VY,VZ unit error fixed (inputs must be passes in mas/yr always, not muas/yr)
 
-gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/my_gaiaerr_wrapper/'+'gaia_errors_color_tmission'
+gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/'+'gaia_errors_color_tmission'
 
 
 parser = argparse.ArgumentParser(description='Simulate Gaia errors + constant relative error in distance')

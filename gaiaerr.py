@@ -12,7 +12,7 @@ import myutils
 
 #Gaia error code path
 #gerr_path='/workd/cmateu/gaia_errors_color_tmission'
-gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/my_gaiaerr_wrapper'
+gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/gaia_errors_color_tmission/'
 
 parser = argparse.ArgumentParser(description='Simulate Gaia errors + constant relative error in distance')
 parser.add_argument('infile',metavar='infile(.ne.dat)',help='Input File (x y z vx vy vz Mv VI)',nargs=1,action='store')
