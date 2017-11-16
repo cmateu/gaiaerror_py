@@ -8,11 +8,12 @@ import argparse
 import myutils
 
 #--------Version History----------------------------------------------------------------------------
+# 16/nov/2017: parallax mission time scaling factor fixed (goes as (5./tm)**0.5 not **1.)
 # 11/oct/2016: VX,VY,VZ unit error fixed (inputs must be passes in mas/yr always, not muas/yr)
 
 #Gaia error code path
-#gerr_path='/workd/cmateu/gaia_errors_color_tmission'
-gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/gaia_errors_color_tmission/'
+gerr_path='/workd/cmateu/gaia_errors_color_tmission'
+#gerr_path='/Users/cmateu/trabajo/gaia/gaia_challenge2014_mgc3/gaiaerror_py/'+'gaia_errors_color_tmission'
 
 parser = argparse.ArgumentParser(description='Simulate Gaia errors + constant relative error in distance')
 parser.add_argument('infile',metavar='infile(.ne.dat)',help='Input File (x y z vx vy vz Mv VI)',nargs=1,action='store')
@@ -31,8 +32,10 @@ if args.verbose:
 
 #Compute error scaling factor based on mission time (following Brown and deBruijne's prescriptions, priv. comm.)
 if mission_t<=10.:
+ pfactor=(5./mission_t)**0.5  #nominal errors are for mission_t=5., so factor==1 in this case. For parallax err scales as t
  factor=(5./mission_t)**1.5   #nominal errors are for mission_t=5., so factor==1 in this case
 else:
+ pfactor=(5./mission_t)**0.5   #If new Gaia is launched, scaling can be conservatively assumed to go as t
  factor=(5./mission_t)**1.    #If new Gaia is launched, scaling can be conservatively assumed to go as t
 #Extra labels
 if mission_t==5: tlabel=''
@@ -59,8 +62,17 @@ os.system('%s/compute_err_color_gaia_tmission < %s' % (gerr_path,auxinf))
 dat=scipy.genfromtxt(auxoutf)
 
 #Get true parallax, simulate gpar by adding gaussian X% error 
+relerr_par=dat[:,5-1]
 xpar=dat[:,12-1]
 gpar=dat[:,25-1]
+
+#Rescale parallax err
+sigma_par_new=(gpar-xpar)*pfactor
+gpar=xpar+sigma_par_new
+sigma_par_ref=relerr_par*xpar  #sigma used to draw random gaussian par error
+sigma_par_ref_new=sigma_par_ref*pfactor
+relerr_par_obs_new=sigma_par_ref_new/gpar   #this is fobs. relerr_par is ftrue
+relerr_par_tru_new=sigma_par_ref_new/xpar
 
 #Recompute gvrad (a lot come out from Merce's code as ****)
 xvrad=dat[:,18-1]
@@ -91,14 +103,19 @@ dat[:,31-1]=gvrad
 #---Proper motion cols----
 dat[:,33-1]=dat[:,33-1]*factor  #sigma_mub
 dat[:,36-1]=dat[:,36-1]*factor  #relerr_mub
+#Parallax error cols------
+dat[:, 5-1]=relerr_par_tru_new  #relerr_par
+dat[:,32-1]=relerr_par_obs_new  #relerr_par_obs
 #---Cartesian coords
-#recompute only velocities, parallax errors are not changed
+dat[:,19-1]=-mydat.x
+dat[:,20-1]=mydat.y
+dat[:,21-1]=mydat.z
 dat[:,22-1]=-mydat.vx
 dat[:,23-1]=mydat.vy
 dat[:,24-1]=mydat.vz
 
 #Header and print formats
-head_l=['Av','xV','Gmag','Grvs','relerr_par','xX','xY','xZ','xVX','xVY','xVZ','xpar_mas','xl_deg','xb_deg','xRhel','xmuls_cosb_mas','xmub_mas','xvrad','gX','gY','gZ','gVX','gVY','gVZ','gpar_mas','gl_deg','gb_deg','gRhel','gmuls_cosb_mas','gmub_mas','gvrad','relerr_D','sig_mub','sig_vrad','VI','relerr_mub','relerr_vrad']
+head_l=['Av','xV','Gmag','Grvs','relerr_par','xX','xY','xZ','xVX','xVY','xVZ','xpar_mas','xl_deg','xb_deg','xRhel','xmuls_cosb_mas','xmub_mas','xvrad','gX','gY','gZ','gVX','gVY','gVZ','gpar_mas','gl_deg','gb_deg','gRhel','gmuls_cosb_mas','gmub_mas','gvrad','relerr_parobs','sig_mub','sig_vrad','VI','relerr_mub','relerr_vrad']
 head_cols=np.arange(len(head_l))+1
 hfmts='#%17s '+(len(head_l)-1)*'%18s '
 hfmts=hfmts+'\n'
